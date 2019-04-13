@@ -1,0 +1,40 @@
+{
+  "name": "TicTacToe",
+  "version": "0.0.1",
+  "description": "Крестики-Нолики — логическая игра между двумя противниками на квадратном поле 3 на 3 клетки.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.dev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kenedi231/TicTacToe.git"
+  },
+  "keywords": [],
+  "author": "Kolya Kalsin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kenedi231/TicTacToe/issues"
+  },
+  "homepage": "https://github.com/Kenedi231/TicTacToe#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/preset-env": "^7.4.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "body-parser": "^1.18.3",
+    "css-loader": "^2.1.1",
+    "express": "^4.16.4",
+    "http": "0.0.0",
+    "less": "^3.9.0",
+    "less-loader": "^4.1.0",
+    "path": "^0.12.7",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.30.0",
+    "webpack-dev-middleware": "^3.6.2",
+    "webpack-hot-middleware": "^2.24.3"
+  }
+}

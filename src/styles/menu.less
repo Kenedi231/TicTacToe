@@ -1,0 +1,48 @@
+.block {
+    width: 452px;
+    height: 500px;
+    margin: 0 auto;
+    position: relative;
+    .plus {
+        cursor: pointer;
+        padding: 15px 20px;
+        border: 1px solid #005d00;
+        border-radius: 50% 50%;
+        background-color: #005d00;
+        color: #fff;
+        position: absolute;
+        bottom: 30px;
+        right: 5px;
+    }
+}
+
+.name {
+    margin-top: 2%;
+    width: 350px;
+    height: 30px;
+    border: none;
+    outline: none;
+    padding: 0 0 3px 5px;
+    border-bottom: 1px solid #444;
+    &:focus {
+        border-bottom: 2px solid orange;
+        padding-bottom: 2px;
+    }
+}
+
+.games {
+    margin-top: 20px;
+    div {
+            cursor: pointer;
+            position: relative;
+            background-color: #777;
+            display: inline-block;
+            width: 105px;
+            height: 110px;
+            margin: 0 10px 10px 0;
+    }
+    div:nth-child(4n+4) {
+        margin-right: 0;
+    }
+}
+
