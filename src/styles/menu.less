@@ -16,6 +16,16 @@
     }
 }
 
+.line {
+    width: 90%;
+    height: 1px;
+    position: absolute;
+    top: 55px;
+    left: 5px;
+    display: none;
+    background-color: #444;
+}
+
 .name {
     margin-top: 2%;
     width: 350px;
@@ -32,17 +42,48 @@
 
 .games {
     margin-top: 20px;
-    div {
+    .game {
             cursor: pointer;
             position: relative;
-            background-color: #777;
-            display: inline-block;
+            display: inline-grid;
             width: 105px;
             height: 110px;
             margin: 0 10px 10px 0;
+            p {
+                font-size: 1em;
+                padding: 5px 5px 0;
+            }
     }
-    div:nth-child(4n+4) {
+    .game:nth-child(4n+4) {
         margin-right: 0;
+    }
+    .ready {
+        background-color: #777;
+        p {
+            color: #fff;
+        }
+    }
+    .play {
+        background-color: #aaa;
+        p {
+            color: #fff;
+        }
+        .line {
+            display: block;
+        }
+    }
+    .done {
+        background-color: #ddd;
+        p {
+            color: #444;
+        }
+        .winner {
+            color: #f29b00;
+        }
+        .line {
+            background-color: #aaa;
+            display: block;
+        }
     }
 }
 

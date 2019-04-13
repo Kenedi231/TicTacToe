@@ -1,4 +1,5 @@
 const stateGame = async function (req, res, next) {
+    let gameToken = req.body;
     let result = {
         "status": "ok",
         code: 0,
