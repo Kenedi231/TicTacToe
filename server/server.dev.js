@@ -5,11 +5,12 @@ const path = require("path");
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
-const configWebpack = require('./webpack.config.dev');
+const configWebpack = require('../webpack.config.dev');
+const gameRouter = require('./routes/games');
+const errorHandler = require('./middlewares/errorHandler');
+const config = require('../config');
 
 const compiler = webpack(configWebpack);
-
-const port = 3000;
 
 app.use(webpackDevMiddleware(compiler, {
     publicPath: configWebpack.output.publicPath
@@ -18,9 +19,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('*', function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/index.html"));
+    res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-http.listen(port, function () {
-    console.log('Tic Tac Toe app listening on port http://localhost:' + port + '/\n');
+app.use('/games', gameRouter);
+
+http.listen(config.port, function () {
+    console.log('Tic Tac Toe app listening on port http://localhost:' + config.port + '/\n');
 });
+
+app.use(errorHandler);

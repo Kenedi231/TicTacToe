@@ -4,7 +4,7 @@
   "description": "Крестики-Нолики — логическая игра между двумя противниками на квадратном поле 3 на 3 клетки.",
   "main": "index.js",
   "scripts": {
-    "start": "node server.dev.js"
+    "start": "nodemon server/server.dev.js --watch server"
   },
   "repository": {
     "type": "git",
@@ -29,6 +29,7 @@
     "http": "0.0.0",
     "less": "^3.9.0",
     "less-loader": "^4.1.0",
+    "mongodb": "^3.2.3",
     "path": "^0.12.7",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
