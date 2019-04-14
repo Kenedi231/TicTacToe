@@ -3,6 +3,7 @@ import style from '../styles/game.less';
 import exitGame from '../service/exitGame';
 import stateGame from '../service/stateGame';
 import cookieParser from '../service/cookieParser';
+import doStep from '../service/doStep';
 
 class Game extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ class Game extends Component {
         };
         this.exit = this.exit.bind(this);
     }
+
 
     exit() {
         clearInterval(this.state.time);
@@ -29,7 +31,7 @@ class Game extends Component {
         this.setState({
             time: setInterval(() => {
                 this.setState({data: stateGame()});
-            }, 2000)
+            }, 1000)
         })
     }
 
@@ -65,10 +67,10 @@ class Game extends Component {
                                 let symbol = "";
                                 if (item === 'x') {
                                     symbol = <span className={style.cross}></span>;
-                                } else if (item === '0') {
+                                } else if (item === 'o') {
                                     symbol = <span className={style.round}></span>;
                                 }
-                                return <div key={key + key2} className={style.cell}>
+                                return <div onClick={doStep.bind(this, key, key2)} id={"" + key + key2} key={key + key2} className={style.cell}>
                                     {symbol}
                                 </div>
                             })
