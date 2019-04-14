@@ -1,8 +1,10 @@
 const makeToken = require('./makeToken');
+const random = require('../middlewares/random');
 const Game = require('../models/game');
 
 const newGame = async function (req, res, next) {
     let { userName, size } = req.body;
+    let step = random(1, 2);
     let accessToken = await makeToken(12);
     let gameToken = await makeToken(6);
     let game;
@@ -15,7 +17,8 @@ const newGame = async function (req, res, next) {
             second: "",
             size: +size,
             gameDuration: 0,
-            gameResult: ""
+            gameResult: "",
+            step: step === 1 ? "owner" : "opponent"
         })
     } catch (e) {
         next({ status: "error", code: 400, message: "Could not create game"})

@@ -2,25 +2,38 @@ const Game = require('../models/game');
 
 const stateGame = async function (req, res, next) {
     let gameToken = req.cookies.gameToken;
-    console.log(gameToken);
     if (gameToken !== "") {
+        let accessToken = req.cookies.accessToken;
+        let youTurn = false;
         let game;
         try {
             game = await Game.findOne({gameToken: gameToken});
         } catch (e) {
             next({"status": "error", code: 400, "message": "Game not found"})
         }
-        let result = {
-            "status": "ok",
-            code: 0,
-            "youTurn": true,
-            "owner": game.owner,
-            "opponent": game.opponent,
-            "gameDuration": game.gameDuration,
-            "field": game.field,
-            "winner": game.gameResult === "owner" ? game.owner : game.gameResult === "opponent" ? game.opponent : game.gameResult === "draw" ? "draw" : ""
-        };
-        res.json(result);
+        if (game !== null) {
+            if (game.first === accessToken && game.step === "owner") {
+                youTurn = true;
+            } else if (game.second === accessToken && game.step === "opponent") {
+                youTurn = true;
+            } else {
+                youTurn = false;
+            }
+            let result = {
+                "status": "ok",
+                code: 0,
+                "accessTokenOwner": game.first,
+                "youTurn": youTurn,
+                "owner": game.owner,
+                "opponent": game.opponent,
+                "gameDuration": game.gameDuration,
+                "field": game.field,
+                "winner": game.gameResult
+            };
+            res.json(result);
+        } else {
+            next({"status": "error", code: 400, "message": "Game not found"})
+        }
     } else {
         next({"status": "error", code: 400, "message": "Game not found"})
     }

@@ -1,15 +1,20 @@
+@green-color: #005d00;
+@gray-color: #444;
+@white-color: #fff;
+
 .block {
     width: 452px;
     height: 500px;
     margin: 0 auto;
+    overflow: hidden;
     position: relative;
     .plus {
         cursor: pointer;
         padding: 15px 20px;
-        border: 1px solid #005d00;
+        border: 1px solid @green-color;
         border-radius: 50% 50%;
-        background-color: #005d00;
-        color: #fff;
+        background-color: @green-color;
+        color: @white-color;
         position: absolute;
         bottom: 30px;
         right: 5px;
@@ -23,7 +28,7 @@
     top: 55px;
     left: 5px;
     display: none;
-    background-color: #444;
+    background-color: @gray-color;
 }
 
 .name {
@@ -33,7 +38,8 @@
     border: none;
     outline: none;
     padding: 0 0 3px 5px;
-    border-bottom: 1px solid #444;
+    background-color: #eee;
+    border-bottom: 1px solid @gray-color;
     &:focus {
         border-bottom: 2px solid orange;
         padding-bottom: 2px;
@@ -60,13 +66,13 @@
     .ready {
         background-color: #777;
         p {
-            color: #fff;
+            color: @white-color;
         }
     }
     .play {
         background-color: #aaa;
         p {
-            color: #fff;
+            color: @white-color;
         }
         .line {
             display: block;
@@ -75,7 +81,7 @@
     .done {
         background-color: #ddd;
         p {
-            color: #444;
+            color: @gray-color;
         }
         .winner {
             color: #f29b00;

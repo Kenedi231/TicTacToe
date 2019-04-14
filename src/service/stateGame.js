@@ -4,6 +4,7 @@ function stateGame() {
     xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
     xhr.send();
     return JSON.parse(xhr.responseText);
+
 }
 
 export default stateGame;

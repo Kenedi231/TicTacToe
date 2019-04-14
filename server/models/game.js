@@ -11,7 +11,7 @@ const gameSchema = new Schema({
         type: String
     },
     first: {
-        type: String
+        type: String,
     },
     second: {
         type: String
@@ -37,6 +37,9 @@ const gameSchema = new Schema({
             "???",
             "???"
         ]
+    },
+    step: {
+        type: String // Owner Opponent
     },
     viewers: {
         type: Array,
