@@ -12,7 +12,7 @@ const listGames = async function (req, res, next) {
         games[i].gameDuration = Games[i].gameDuration;
         games[i].gameResult = Games[i].gameResult;
         games[i].state = Games[i].state
-    };
+    }
     let result = {
         "status": "ok",
         "code": 0,

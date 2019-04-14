@@ -1,46 +1,32 @@
 import React, { Component } from "react";
-import style from '../styles/menu.less';
-import updateGames from '../service/updateGames';
+import cookieParser from '../service/cookieParser';
+import List from './List';
+import Game from './Game';
 
 class Menu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: updateGames()
+            cookie: cookieParser()
         }
     }
     componentDidMount() {
-        setInterval(() => {
-            this.setState({games: updateGames()});
-        }, 2000)
+        setInterval( () => {
+            this.setState({cookie: cookieParser()});
+        }, 0)
     }
     render() {
+        let out = null;
+        if (this.state.cookie.gameToken === "") {
+            out = <List nickname={this.state.cookie.userName}/>;
+        } else {
+            out = <Game token={this.state.cookie.gameToken}/>;
+        }
         return (
-            <div className={style.block}>
-                <input id="nickname" className={style.name} placeholder="Enter your nickname" value="Guest"/>
-                <div id="games" className={style.games}>
-                    {
-                        this.state.games.map((game, key) => {
-                            let classes = style.game;
-                            if (game.state === "ready") {
-                                classes += " " + style.ready;
-                            } else if (game.state === "playing") {
-                                classes += " " + style.play;
-                            } else {
-                                classes += " " + style.done;
-                            }
-                            return <div id={game.gameToken} key={key} className={classes}>
-                                <p>{game.owner}</p>
-                                <div className={style.line}>
-                                </div>
-                                <p>{game.opponent}</p>
-                            </div>
-                        })
-                    }
-                </div>
-                <p className={style.plus}>+</p>
+            <div>
+                {out}
             </div>
-        );
+        )
     }
 }
 

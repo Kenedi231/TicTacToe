@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import style from './styles/index..less';
+import style from './styles/index.less';
 import Header from './components/Header';
 import Menu from './components/Menu';
 

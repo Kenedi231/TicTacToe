@@ -20,13 +20,14 @@ const newGame = async function (req, res, next) {
     } catch (e) {
         next({ status: "error", code: 400, message: "Could not create game"})
     }
-    console.log(game);
     let result = {
         "status": "ok",
         "code": 0,
         "accessToken": accessToken,
         "gameToken": gameToken
     };
+
+    res.cookie("userName", userName);
     res.cookie("accessToken", accessToken);
     res.cookie("gameToken", gameToken);
     res.json(result);

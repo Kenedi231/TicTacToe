@@ -9,6 +9,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('*', function (req, res) {
+    if (req.cookies.gameToken === undefined) {
+        res.cookie("gameToken", "");
+    }
     res.sendFile(path.join(__dirname, "/public/index.html"));
 });
 
