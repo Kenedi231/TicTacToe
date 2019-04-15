@@ -1,6 +1,7 @@
 @green-color: #005d00;
 @gray-color: #444;
 @white-color: #fff;
+@orange-color: #f29b00;
 
 .block {
     width: 90%;
@@ -46,6 +47,13 @@
     }
 }
 
+.mark {
+    position: absolute;
+    display: none;
+    top: 2px;
+    right: 2px;
+}
+
 .games {
     margin-top: 20px;
     .game {
@@ -58,6 +66,7 @@
             p {
                 font-size: 1em;
                 padding: 5px 5px 0;
+                position: relative;
             }
     }
     .game:nth-child(4n+4) {
@@ -84,7 +93,11 @@
             color: @gray-color;
         }
         .winner {
-            color: #f29b00;
+            color: @orange-color;
+        }
+        .winner .mark {
+            display: block;
+            color: @orange-color;
         }
         .line {
             background-color: #aaa;

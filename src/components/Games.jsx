@@ -72,9 +72,9 @@ class Games extends Component {
                     this.state.games.map((game, key) => {
                         let classes = this.gameState(game.state);
                         return <div onClick={this.join.bind(this, game.gameToken)} id={game.gameToken} key={key} className={classes}>
-                            <p className={this.checkWinner(game, owner)}>{game.owner}</p>
+                            <p className={this.checkWinner(game, owner)}>{game.owner}<span className={style.mark}>&#10004;</span></p>
                             <div className={style.line} />
-                            <p className={this.checkWinner(game, opponent)}>{game.opponent}</p>
+                            <p className={this.checkWinner(game, opponent)}>{game.opponent}<span className={style.mark}>&#10004;</span></p>
                         </div>
                     })
                 }
