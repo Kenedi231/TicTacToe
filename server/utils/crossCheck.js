@@ -15,8 +15,8 @@ function crossCheck(field) {
     if (prev !== "") {
         return prev;
     }
+    prev = "";
     for (let i = 0, j = field.length - 1; i < field.length, j >= 0; i++, j--) {
-        prev = "";
         if (prev === "") {
             prev = field[i][j];
         } else if (prev === field[i][j] && prev !== mark) {
@@ -25,11 +25,8 @@ function crossCheck(field) {
             prev = "";
             break;
         }
-        if (prev !== "") {
-            return prev;
-        }
     }
-    return "";
+    return prev;
 }
 
 module.exports = crossCheck;

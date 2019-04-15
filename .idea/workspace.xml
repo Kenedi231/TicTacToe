@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2dbe415f-c1b9-449b-9d15-b87cce49d73d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/utils/crossCheck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/utils/horizontalCheck.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/utils/verticalCheck.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/doStep.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/doStep.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/utils/checkField.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/utils/checkField.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Games.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Games.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/game.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/game.less" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/list.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/list.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/utils/crossCheck.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/utils/crossCheck.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -32,7 +24,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server/utils/checkField.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="248">
@@ -41,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/utils/crossCheck.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="478">
-              <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+            <state relative-caret-position="368">
+              <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -293,12 +285,12 @@
       <workItem from="1555221193011" duration="10343000" />
       <workItem from="1555239226645" duration="11631000" />
       <workItem from="1555261546803" duration="7022000" />
-      <workItem from="1555327240825" duration="28937000" />
+      <workItem from="1555327240825" duration="29473000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102256000" />
+    <option name="totallyTimeSpent" value="102792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -670,17 +662,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/utils/crossCheck.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/server/utils/checkField.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
           <caret line="27" column="39" lean-forward="true" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/utils/crossCheck.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
         </state>
       </provider>
     </entry>
