@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import style from '../styles/game.less';
+import GameField from './GameField';
 import exitGame from '../service/exitGame';
 import stateGame from '../service/stateGame';
-import doStep from '../service/doStep';
 
 const delay = 1000;
 const owner_text = "owner";
@@ -37,12 +37,6 @@ class Game extends Component {
         })
     };
 
-    step = (x, y) => {
-        doStep(x, y).catch(err => {
-            console.log(err);
-        })
-    };
-
     exit = () => {
         exitGame().then(() => {
             clearInterval(this.state.time);
@@ -58,6 +52,7 @@ class Game extends Component {
     render() {
         let owner = "";
         let opponent = "";
+        let game;
         if (this.state.data.field === undefined) {
             return null;
         }
@@ -67,27 +62,21 @@ class Game extends Component {
         } else {
             opponent = style.turn;
         }
+        if (this.state.data.youViewer) {
+            game = `${style.block_game} ${style.viewer}`;
+        } else {
+            game = `${style.block_game}`;
+        }
+        owner = `${style.nick} ${style.owner} ${owner}`;
+        opponent = `${style.nick} ${style.opponent} ${opponent}`;
         return (
-            <div className={style.block_game} id={this.props.token}>
-                <p className={style.nick + " " + style.owner + " " + owner}>{this.state.data.owner} <span className={style.cross}></span></p>
-                <p className={style.nick + " " + style.opponent + " " + opponent}><span className={style.round}></span>{secondPlayer}</p>
-                <div className="clearfix"></div>
+            <div className={game} id={this.props.token}>
+                <div className={style.name_player}>
+                    <p className={owner}>{this.state.data.owner} <span className={style.cross} /></p>
+                    <p className={opponent}><span className={style.round} />{secondPlayer}</p>
+                </div>
                 <div className={style.game_field}>
-                    {
-                        this.state.data.field.map((rows, key) => {
-                            return rows.split('').map((item, key2) => {
-                                let symbol = "";
-                                if (item === 'x') {
-                                    symbol = <span className={style.cross}></span>;
-                                } else if (item === 'o') {
-                                    symbol = <span className={style.round}></span>;
-                                }
-                                return <div onClick={this.step.bind(this, key, key2)} id={"" + key + key2} key={key + key2} className={style.cell}>
-                                    {symbol}
-                                </div>
-                            })
-                        })
-                    }
+                    <GameField field={this.state.data.field} />
                 </div>
                 <p onClick={this.exit}>Exit</p>
             </div>

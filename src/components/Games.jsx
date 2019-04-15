@@ -47,18 +47,17 @@ class Games extends Component {
             <div id="games" className={style.games}>
                 {
                     this.state.games.map((game, key) => {
-                        let classes = style.game;
+                        let classes;
                         if (game.state === "ready") {
-                            classes += " " + style.ready;
+                            classes = `${style.game} ${style.ready}`;
                         } else if (game.state === "playing") {
-                            classes += " " + style.play;
+                            classes = `${style.game} ${style.play}`;
                         } else {
-                            classes += " " + style.done;
+                            classes = `${style.game} ${style.done}`;
                         }
                         return <div onClick={this.join.bind(this, game.gameToken)} id={game.gameToken} key={key} className={classes}>
                             <p>{game.owner}</p>
-                            <div className={style.line}>
-                            </div>
+                            <div className={style.line} />
                             <p>{game.opponent}</p>
                         </div>
                     })

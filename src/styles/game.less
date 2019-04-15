@@ -8,7 +8,7 @@
 }
 
 .block_game {
-    width: 452px;
+    width: 90%;
     margin: 20px auto 0;
     .nick {
         display: block;
@@ -18,15 +18,18 @@
         position: relative;
     }
     .game_field {
-        width: 291px;
+        width: 65%;
+        max-width: 291px;
         margin: 65px auto;
         .cell {
             position: relative;
             border: 5px solid #f29b00;
             display: inline-block;
-            width: 88px;
+            width: 30%;
+            min-width: 88px;
             margin: -7px 0 0 -2px;
-            height: 88px;
+            height: 30%;
+            min-height: 88px;
             .round {
                 top: 8px;
                 left: 8px;
@@ -59,26 +62,33 @@
             border-right: none;
         }
     }
-    .owner {
-        float: left;
-        padding-right: 35px;
-    }
-    .opponent {
-        padding-left: 35px;
-        float: right;
-    }
-    .turn {
-        border-bottom: 2px solid #222;
+    .name_player {
+        display: flex;
+        justify-content: space-between;
+        .owner {
+            padding-right: 35px;
+        }
+
+        .opponent {
+            padding-left: 35px;
+        }
+
+        .turn {
+            border-bottom: 2px solid #222;
+        }
     }
 }
 
 .viewer {
     color: #ccc;
-    .turn {
-        border-bottom: 2px solid #999;
-    }
-    .nick {
-        color: #ccc;
+    .name_player {
+        .turn {
+            border-bottom: 2px solid #999;
+        }
+
+        .nick {
+            color: #ccc;
+        }
     }
     .round {
         border: 2px solid #bbb;
