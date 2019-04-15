@@ -10,10 +10,10 @@ const gameSchema = new Schema({
     owner: {
         type: String
     },
-    first: {
+    firstToken: {
         type: String,
     },
-    second: {
+    secondToken: {
         type: String
     },
     opponent: {

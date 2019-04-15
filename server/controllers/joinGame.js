@@ -9,7 +9,7 @@ const joinGame = async function (req, res, next) {
     if (game.opponent === "") {
         newGame = await Game.updateOne({ gameToken: gameToken}, {
             opponent: userName,
-            second: accessToken,
+            secondToken: accessToken,
             state: "playing"
         })
     } else {

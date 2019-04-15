@@ -3,12 +3,12 @@ const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const path = require("path");
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 
 const configWebpack = require('../webpack.config.dev');
 const gameRouter = require('./routes/games');
+const mainRouter = require('./routes/main');
 const errorHandler = require('./middlewares/errorHandler');
 const config = require('../config');
 
@@ -28,14 +28,7 @@ mongoose.connect(config.url, function (err) {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/games', gameRouter);
-
-app.get('*', function (req, res) {
-    if (req.cookies.gameToken === undefined) {
-        res.cookie("gameToken", "");
-    }
-    res.sendFile(path.join(__dirname, "../public/index.html"));
-});
-
+app.use('*', mainRouter);
 
 http.listen(config.port, function () {
     console.log('Tic Tac Toe app listening on port http://localhost:' + config.port + '/\n');

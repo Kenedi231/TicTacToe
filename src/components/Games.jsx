@@ -3,25 +3,45 @@ import style from "../styles/list.less";
 import updateGames from '../service/updateGames';
 import joinGame from '../service/joinGame';
 
+const delay = 2000;
+
 class Games extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            games: updateGames()
+            games: []
         };
-        this.join = this.join.bind(this);
     }
 
-    join(token) {
-        let nick = document.getElementById("nickname").value || "Guest";
-        joinGame(nick, token);
+    componentWillMount() {
+        this.updateState()
     }
 
     componentDidMount() {
         setInterval(() => {
-            this.setState({games: updateGames()});
-        }, 2000)
+            this.updateState()
+        }, delay)
     }
+
+    updateState = () => {
+        updateGames().then( data => {
+            this.setState({
+                games: data.games
+            })
+        }).catch( err => {
+            console.log(err);
+        })
+    };
+
+    join = (token) => {
+        let nick = document.getElementById("nickname").value || "Guest";
+        joinGame(nick, token).then(() => {
+            console.log("OK");
+        }).catch(err => {
+            console.log(err);
+        })
+    };
+
     render() {
         return (
             <div id="games" className={style.games}>

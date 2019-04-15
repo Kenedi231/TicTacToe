@@ -1,9 +1,10 @@
+import getInitGET from './getInitGET';
+
 function updateGames() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', '/games/list', false);
-    xhr.send();
-    let res = JSON.parse(xhr.responseText);
-    return res.games;
+    let request = new Request('/games/list', getInitGET());
+    return fetch(request).then( response => {
+        return response.json()
+    })
 }
 
 export default updateGames;

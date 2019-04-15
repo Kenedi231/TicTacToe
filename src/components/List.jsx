@@ -6,16 +6,20 @@ import createGame from '../service/createGame';
 class List extends Component {
     constructor(props) {
         super(props);
-        this.create = this.create.bind(this);
     }
 
-    create() {
-        let nick = document.getElementById("nickname").value;
-        let res = createGame(nick);
+    componentDidMount() {
+        document.getElementById("nickname").value = this.props.nickname;
     }
+
+    create = () => {
+        let nick = document.getElementById("nickname").value;
+        createGame(nick).catch(err => {
+            console.log(err);
+        })
+    };
 
     render() {
-        let nick = this.props.nickname;
         return (
             <div className={style.block}>
                 <input id="nickname" className={style.name} placeholder="Enter your nickname"/>

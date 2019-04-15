@@ -1,5 +1,5 @@
 const makeToken = require('./makeToken');
-const random = require('../middlewares/random');
+const random = require('../utils/random');
 const Game = require('../models/game');
 
 const newGame = async function (req, res, next) {
@@ -12,9 +12,9 @@ const newGame = async function (req, res, next) {
         game = await Game.create({
             gameToken: gameToken,
             owner: userName,
-            first: accessToken,
+            firstToken: accessToken,
             opponent: "",
-            second: "",
+            secondToken: "",
             size: +size,
             gameDuration: 0,
             gameResult: "",

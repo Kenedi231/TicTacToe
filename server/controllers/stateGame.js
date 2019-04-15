@@ -22,7 +22,7 @@ const stateGame = async function (req, res, next) {
             let result = {
                 "status": "ok",
                 code: 0,
-                "accessTokenOwner": game.first,
+                "step": game.step,
                 "youTurn": youTurn,
                 "owner": game.owner,
                 "opponent": game.opponent,

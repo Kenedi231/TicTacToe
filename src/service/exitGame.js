@@ -1,7 +1,10 @@
+import getInitPOST from './getInitPOST';
+
 function exitGame() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', '/games/exit', false);
-    xhr.send();
+    let request = new Request('/games/exit', getInitPOST());
+    return fetch(request).then(response => {
+        return response.json();
+    })
 }
 
 export default exitGame;

@@ -1,10 +1,10 @@
-function stateGame() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', '/games/state', false);
-    xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-    xhr.send();
-    return JSON.parse(xhr.responseText);
+import getInitGET from './getInitGET';
 
+function stateGame() {
+    let request = new Request('/games/state', getInitGET());
+    return fetch(request).then(response => {
+        return response.json();
+    })
 }
 
 export default stateGame;
