@@ -1,7 +1,7 @@
 
 function getInitGET() {
     let headers = new Headers({
-        "Content-Type": "text/json",
+        "Content-Type": "application/json",
     });
     return {
         method: 'GET',

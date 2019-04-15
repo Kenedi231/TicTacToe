@@ -1,3 +1,6 @@
+@orange-color: #f29b00;
+@gray-color: #ccc;
+
 .round {
     position: absolute;
     left: 0;
@@ -10,6 +13,20 @@
 .block_game {
     width: 90%;
     margin: 20px auto 0;
+    .button {
+        display: block;
+        text-align: center;
+        background-color: #00b477;
+        color: #fff;
+        cursor: pointer;
+        text-transform: uppercase;
+        padding: 7px 1px;
+        width: 32%;
+        margin: 20px auto 0;
+        &:hover {
+            background-color: #006d43;
+        }
+    }
     .nick {
         display: block;
         font-size: 1.5em;
@@ -23,9 +40,9 @@
         margin: 65px auto;
         .cell {
             position: relative;
-            border: 5px solid #f29b00;
+            border: 5px solid @orange-color;
             display: inline-block;
-            width: 30%;
+            width: 31.7%;
             min-width: 88px;
             margin: -7px 0 0 -2px;
             height: 30%;
@@ -76,18 +93,27 @@
         .turn {
             border-bottom: 2px solid #222;
         }
+        .winner {
+            color: @orange-color;
+        }
+        .winner.nick {
+            color: @orange-color;
+        }
+        .winner.turn {
+            border-color: @orange-color;
+        }
     }
 }
 
 .viewer {
-    color: #ccc;
+    color: @gray-color;
     .name_player {
         .turn {
             border-bottom: 2px solid #999;
         }
 
         .nick {
-            color: #ccc;
+            color: @gray-color;
         }
     }
     .round {
@@ -95,7 +121,7 @@
     }
     .game_field {
         .cell {
-            border-color: #ccc;
+            border-color: @gray-color;
         }
     }
 }

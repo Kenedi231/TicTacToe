@@ -11,7 +11,7 @@ class GameField extends Component {
         let res = "";
         if (symbol === 'x') {
             res = style.cross
-        } else if (symbol === 'y') {
+        } else if (symbol === 'o') {
             res = style.round
         }
         if (res !== "") {

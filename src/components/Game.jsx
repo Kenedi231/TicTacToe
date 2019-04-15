@@ -5,8 +5,11 @@ import exitGame from '../service/exitGame';
 import stateGame from '../service/stateGame';
 
 const delay = 1000;
-const owner_text = "owner";
+const owner = "owner";
+const opponent = "opponent";
 const wait = "wait...";
+const back = "back";
+const surrender = "surrender";
 
 class Game extends Component {
     constructor(props) {
@@ -49,36 +52,56 @@ class Game extends Component {
         })
     };
 
+    stylePlayer = (player) => {
+        let ownerStyle = "";
+        let opponentStyle = "";
+        let winner = "";
+        if (this.state.data.step === owner) {
+            ownerStyle = style.turn;
+        } else {
+            opponentStyle = style.turn;
+        }
+        if (player === owner) {
+            winner = this.state.data.winner === owner ? style.winner: "";
+            return `${style.nick} ${style.owner} ${ownerStyle} ${winner}`;
+        } else {
+            winner = this.state.data.winner === opponent ? style.winner: "";
+            return `${style.nick} ${style.opponent} ${opponentStyle} ${winner}`;
+        }
+    };
+
+    gameStyle = () => {
+        if (this.state.data.youViewer) {
+            return `${style.block_game} ${style.viewer}`;
+        } else {
+            return `${style.block_game}`;
+        }
+    };
+
+    buttonExit = () => {
+        let condition = this.state.data.opponent === "" || this.state.data.winner !== "" || this.state.data.youViewer;
+        if (condition) {
+            return back
+        } else {
+            return surrender
+        }
+    };
+
     render() {
-        let owner = "";
-        let opponent = "";
-        let game;
         if (this.state.data.field === undefined) {
             return null;
         }
         let secondPlayer = this.state.data.opponent || wait;
-        if (this.state.data.step === owner_text) {
-            owner = style.turn;
-        } else {
-            opponent = style.turn;
-        }
-        if (this.state.data.youViewer) {
-            game = `${style.block_game} ${style.viewer}`;
-        } else {
-            game = `${style.block_game}`;
-        }
-        owner = `${style.nick} ${style.owner} ${owner}`;
-        opponent = `${style.nick} ${style.opponent} ${opponent}`;
         return (
-            <div className={game} id={this.props.token}>
+            <div className={this.gameStyle()} id={this.props.token}>
                 <div className={style.name_player}>
-                    <p className={owner}>{this.state.data.owner} <span className={style.cross} /></p>
-                    <p className={opponent}><span className={style.round} />{secondPlayer}</p>
+                    <p className={this.stylePlayer(owner)}>{this.state.data.owner} <span className={style.cross} /></p>
+                    <p className={this.stylePlayer(opponent)}><span className={style.round} />{secondPlayer}</p>
                 </div>
                 <div className={style.game_field}>
                     <GameField field={this.state.data.field} />
                 </div>
-                <p onClick={this.exit}>Exit</p>
+                <p className={style.button} onClick={this.exit}>{this.buttonExit()}</p>
             </div>
         )
     }

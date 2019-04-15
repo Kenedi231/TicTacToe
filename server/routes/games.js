@@ -16,7 +16,7 @@ const asyncRoute = (fn) => (req, res, next) => {
 router.post("/new", asyncRoute(newGame));
 router.post("/join", asyncRoute(joinGame));
 router.post("/do_step", asyncRoute(doStep));
-router.post("/exit", exitGame);
+router.post("/exit", asyncRoute(exitGame));
 router.get("/state", asyncRoute(stateGame));
 router.get("/list", listGames);
 

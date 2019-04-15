@@ -1,5 +1,5 @@
 
-function getInitPOST(body = {}) {
+function getInitPOST(body = JSON.stringify({})) {
     let headers = new Headers({
         "Content-Type": "application/json",
     });

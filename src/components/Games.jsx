@@ -5,6 +5,13 @@ import joinGame from '../service/joinGame';
 
 const delay = 2000;
 
+const ready = "ready";
+const play = "playing";
+
+const owner = "owner";
+const opponent = "opponent";
+const guest = "Guest";
+
 class Games extends Component {
     constructor(props) {
         super(props);
@@ -34,7 +41,7 @@ class Games extends Component {
     };
 
     join = (token) => {
-        let nick = document.getElementById("nickname").value || "Guest";
+        let nick = document.getElementById("nickname").value || guest;
         joinGame(nick, token).then(() => {
             console.log("OK");
         }).catch(err => {
@@ -42,23 +49,32 @@ class Games extends Component {
         })
     };
 
+    gameState = (state) => {
+        if (state === ready) {
+            return `${style.game} ${style.ready}`;
+        } else if (state === play) {
+            return `${style.game} ${style.play}`;
+        } else {
+            return `${style.game} ${style.done}`;
+        }
+    };
+
+    checkWinner = (game, player) => {
+        if (game.gameResult === player) {
+            return style.winner;
+        }
+    };
+
     render() {
         return (
             <div id="games" className={style.games}>
                 {
                     this.state.games.map((game, key) => {
-                        let classes;
-                        if (game.state === "ready") {
-                            classes = `${style.game} ${style.ready}`;
-                        } else if (game.state === "playing") {
-                            classes = `${style.game} ${style.play}`;
-                        } else {
-                            classes = `${style.game} ${style.done}`;
-                        }
+                        let classes = this.gameState(game.state);
                         return <div onClick={this.join.bind(this, game.gameToken)} id={game.gameToken} key={key} className={classes}>
-                            <p>{game.owner}</p>
+                            <p className={this.checkWinner(game, owner)}>{game.owner}</p>
                             <div className={style.line} />
-                            <p>{game.opponent}</p>
+                            <p className={this.checkWinner(game, opponent)}>{game.opponent}</p>
                         </div>
                     })
                 }

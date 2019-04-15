@@ -9,12 +9,14 @@ class List extends Component {
     }
 
     componentDidMount() {
-        document.getElementById("nickname").value = this.props.nickname;
+        document.getElementById("nickname").value = this.props.nickname || "";
     }
 
     create = () => {
         let nick = document.getElementById("nickname").value;
-        createGame(nick).catch(err => {
+        createGame(nick).then(() => {
+            console.log("ok");
+        }).catch(err => {
             console.log(err);
         })
     };
