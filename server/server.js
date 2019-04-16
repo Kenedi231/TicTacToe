@@ -12,8 +12,10 @@ const configWebpack = require('../webpack.config.dev');
 
 const gameRouter = require('./routes/games');
 const mainRouter = require('./routes/main');
-const errorHandler = require('./middlewares/errorHandler');
 const config = require('../config');
+
+const errorHandler = require('./middlewares/errorHandler');
+const { changeOldGamesJob, deletedOldGamesJob } = require('./cron/index');
 
 app.use(bodyParser.json());
 
@@ -40,6 +42,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', gameRouter);
 app.use('*', mainRouter);
+changeOldGamesJob.start();
+deletedOldGamesJob.start();
 
 http.listen(config.port, function () {
     console.log('Tic Tac Toe app listening on port http://localhost:' + config.port + '/\n');

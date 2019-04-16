@@ -19,7 +19,6 @@ const exitGame = async function (req, res, next) {
         const {startGame} = game.toObject();
         let now = +(Date.now());
         let gameDuration = now - startGame;
-        console.log(gameDuration);
         await gameMethods.updateOne(gameToken, {
             gameResult: winner,
             state,

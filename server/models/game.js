@@ -62,6 +62,10 @@ const gameSchema = new Schema({
     startGame: {
         type: Number
     },
+    deleted: {
+        type: Boolean,
+        default: false
+    },
     coll: {
         type: String,
         default: constants.coll

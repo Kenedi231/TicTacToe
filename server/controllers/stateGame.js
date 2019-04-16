@@ -17,8 +17,11 @@ const stateGame = async function (req, res, next) {
     try {
         game = await Game.findOne({ gameToken });
         if(!game) throw {};
+        if(game.deleted) {
+            next(makeMessage())
+        }
     } catch (e) {
-        next(e)
+        next(makeMessage())
     }
     const {youViewer, youTurn} = checkPlayer(accessToken, game);
     let { step, owner, opponent, field, gameDuration, gameResult, state, startGame} = game.toObject();

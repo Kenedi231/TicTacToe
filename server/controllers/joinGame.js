@@ -6,6 +6,9 @@ const joinGame = async function (req, res, next) {
     let { gameToken, userName } = req.body;
     let accessToken = makeToken(12);
     let game = await gameMethods.findOne(gameToken);
+    if (game.deleted) {
+        next({"status": "error", "code": 403, "message": "Game is deleted!"})
+    }
     let newGame;
     if (game.opponent === "") {
         let time = Date.now();

@@ -34,9 +34,13 @@ class Game extends Component {
 
     updateState = () => {
         stateGame().then( data => {
+            let duration = data.state === constants.play ? this.state.gameDuration + delay : this.state.gameDuration;
+            if (duration < data.gameDuration) {
+                duration = data.gameDuration;
+            }
             this.setState({
                 data: data,
-                gameDuration: data.gameDuration
+                gameDuration: duration
             })
         })
     };

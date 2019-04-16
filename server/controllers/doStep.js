@@ -6,6 +6,9 @@ const doStep = async function (req, res, next) {
     let gameToken = req.cookies.gameToken;
     let accessToken = req.cookies.accessToken;
     let game = await gameMethods.findOne(gameToken);
+    if (game.deleted) {
+        next({"status": "error", "code": 403, "message": "Game is deleted!"})
+    }
     if (game.state !== constants.play) {
         let result = {
             "status": "warning",
