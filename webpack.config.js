@@ -16,13 +16,35 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$]/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: /\.less$/,
+                use: [
+                    {
+                        loader: "style-loader"
+                    },
+                    {
+                        loader: "css-loader",
+                        options: {
+                            sourceMap: true,
+                            modules: true,
+                            localIdentName: "[local]"
+                        }
+                    },
+                    {
+                        loader: "less-loader"
+                    }
+                ]
             }
         ]
+    },
+    watchOptions: {
+        aggregateTimeout: 200
     },
     resolve: {
         extensions: ['*', '.js', '.jsx']

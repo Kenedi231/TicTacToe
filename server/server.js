@@ -3,20 +3,27 @@ const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
-
 const configWebpack = require('../webpack.config.dev');
+
 const gameRouter = require('./routes/games');
 const mainRouter = require('./routes/main');
 const errorHandler = require('./middlewares/errorHandler');
 const config = require('../config');
 
-const compiler = webpack(configWebpack);
+app.use(bodyParser.json());
 
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: configWebpack.output.publicPath
-}));
+if (process.env.NODE_ENV === 'development') {
+    const compiler = webpack(configWebpack);
+
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: configWebpack.output.publicPath
+    }));
+}
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(cookieParser());
 

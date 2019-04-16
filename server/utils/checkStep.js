@@ -16,12 +16,6 @@ async function checkStep(accessToken, game, body) {
             state = info.state;
             gameResult = info.gameResult;
         }
-        return {
-            step,
-            field,
-            state,
-            gameResult
-        }
     }
     return {
         step,
