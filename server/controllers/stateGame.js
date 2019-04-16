@@ -1,3 +1,5 @@
+const constants = require("../constants");
+
 const Game = require('../models/game');
 const checkPlayer = require('../utils/checkPlayer');
 
@@ -19,7 +21,10 @@ const stateGame = async function (req, res, next) {
         next(e)
     }
     const {youViewer, youTurn} = checkPlayer(accessToken, game);
-    const { step, owner, opponent, gameDuration, field, gameResult} = game.toObject();
+    let { step, owner, opponent, field, gameDuration, gameResult, state, startGame} = game.toObject();
+    if (state === constants.play) {
+        gameDuration = +(Date.now()) - startGame;
+    }
     const result = {
         "status": "ok",
         "code": 0,
@@ -30,7 +35,8 @@ const stateGame = async function (req, res, next) {
         opponent,
         gameDuration,
         field,
-        "winner": gameResult
+        "winner": gameResult,
+        state
     };
     res.json(result);
 };

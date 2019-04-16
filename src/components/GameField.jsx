@@ -29,7 +29,6 @@ class GameField extends Component {
 
     render() {
         let symbol = this.defineSymbol();
-        console.log(this.props.key1);
         return (
             <div onClick={this.step} id={`${this.props.key1}${this.props.key2}`} key={this.props.key1 + this.props.key2} className={style.cell}>
                 {symbol}

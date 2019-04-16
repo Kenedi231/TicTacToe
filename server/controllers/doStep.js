@@ -14,11 +14,16 @@ const doStep = async function (req, res, next) {
         res.json(result);
     }
     const {step, field, state, gameResult} = await checkStep(accessToken, game, req.body);
+    const { startGame } = game.toObject();
+    let now = +(Date.now());
+    let gameDuration = now - startGame;
     let newGame = await gameMethods.updateOne(gameToken, {
         step,
         field,
         state,
-        gameResult
+        gameResult,
+        gameDuration,
+        lastUpdate: Date.now()
     });
     let result = {
         "status": "ok",

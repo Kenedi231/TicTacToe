@@ -1,13 +1,9 @@
 import React, { Component } from "react";
+
 import style from "../styles/list.less";
+import constants from '../constants';
+
 import joinGame from "../service/joinGame";
-
-const ready = "ready";
-const play = "playing";
-
-const owner = "owner";
-const opponent = "opponent";
-const guest = "Guest";
 
 class GamesElement extends Component {
     constructor(props) {
@@ -15,7 +11,7 @@ class GamesElement extends Component {
     }
 
     join = () => {
-        let nick = document.getElementById("nickname").value || guest;
+        let nick = document.getElementById("nickname").value || constants.guest;
         joinGame(nick, this.props.game.gameToken).then(() => {
             console.log("OK");
         }).catch(err => {
@@ -24,9 +20,9 @@ class GamesElement extends Component {
     };
 
     gameState = () => {
-        if (this.props.game.state === ready) {
+        if (this.props.game.state === constants.ready) {
             return `${style.game} ${style.ready}`;
-        } else if (this.props.game.state === play) {
+        } else if (this.props.game.state === constants.play) {
             return `${style.game} ${style.play}`;
         } else {
             return `${style.game} ${style.done}`;
@@ -43,9 +39,9 @@ class GamesElement extends Component {
         let classes = this.gameState();
         return (
             <div onClick={this.join} id={this.props.game.gameToken} key={this.props.key} className={classes}>
-                <p className={this.checkWinner(owner)}>{this.props.game.owner}<span className={style.mark}>&#10004;</span></p>
+                <p className={this.checkWinner(constants.owner)}>{this.props.game.owner}<span className={style.mark}>&#10004;</span></p>
                 <div className={style.line} />
-                <p className={this.checkWinner(opponent)}>{this.props.game.opponent}<span className={style.mark}>&#10004;</span></p>
+                <p className={this.checkWinner(constants.opponent)}>{this.props.game.opponent}<span className={style.mark}>&#10004;</span></p>
             </div>
         )
     }

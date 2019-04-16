@@ -55,6 +55,13 @@ const gameSchema = new Schema({
         type: String,
         default: constants.ready // Ready Playing Done
     },
+    lastUpdate: {
+        type: Date,
+        default: Date.now()
+    },
+    startGame: {
+        type: Number
+    },
     coll: {
         type: String,
         default: constants.coll

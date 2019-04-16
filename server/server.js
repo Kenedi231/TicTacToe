@@ -1,8 +1,10 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const http = require('http').Server(app);
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -31,7 +33,9 @@ mongoose.connect(config.url, function (err) {
     if (err) throw err;
     console.log("Mongo connected");
 });
-
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, "../public")));
+}
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', gameRouter);

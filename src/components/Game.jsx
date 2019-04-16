@@ -1,20 +1,20 @@
-import React, { Component } from "react";
-import style from '../styles/game.less';
 import GameField from './GameField';
+import React, { Component } from "react";
+
+import style from '../styles/game.less';
+import constants from '../constants';
+
 import exitGame from '../service/exitGame';
 import stateGame from '../service/stateGame';
+import msToTime from '../service/msToTime';
 
 const delay = 1000;
-const owner = "owner";
-const opponent = "opponent";
-const wait = "wait...";
-const back = "back";
-const surrender = "surrender";
 
 class Game extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            gameDuration: 0,
             data: {},
             time: 0
         };
@@ -29,13 +29,14 @@ class Game extends Component {
             time: setInterval(() => {
                 this.updateState();
             }, delay)
-        })
+        });
     }
 
     updateState = () => {
         stateGame().then( data => {
             this.setState({
-                data: data
+                data: data,
+                gameDuration: data.gameDuration
             })
         })
     };
@@ -44,6 +45,7 @@ class Game extends Component {
         exitGame().then(() => {
             clearInterval(this.state.time);
             this.setState({
+                timer: 0,
                 time: 0,
                 data: {}
             });
@@ -56,16 +58,16 @@ class Game extends Component {
         let ownerStyle = "";
         let opponentStyle = "";
         let winner = "";
-        if (this.state.data.step === owner) {
+        if (this.state.data.step === constants.owner) {
             ownerStyle = style.turn;
         } else {
             opponentStyle = style.turn;
         }
-        if (player === owner) {
-            winner = this.state.data.winner === owner ? style.winner: "";
+        if (player === constants.owner) {
+            winner = this.state.data.winner === constants.owner ? style.winner: "";
             return `${style.nick} ${style.owner} ${ownerStyle} ${winner}`;
         } else {
-            winner = this.state.data.winner === opponent ? style.winner: "";
+            winner = this.state.data.winner === constants.opponent ? style.winner: "";
             return `${style.nick} ${style.opponent} ${opponentStyle} ${winner}`;
         }
     };
@@ -82,33 +84,37 @@ class Game extends Component {
         const { data: { opponent, winner, youViewer } } = this.state;
         let condition = opponent === "" || winner !== "" || youViewer;
         if (condition) {
-            return back
+            return constants.back
         } else {
-            return surrender
+            return constants.surrender
         }
+    };
+
+    defineTimer = () => {
+        return msToTime(this.state.gameDuration)
     };
 
     render() {
         if (this.state.data.field === undefined) {
             return null;
         }
-        let secondPlayer = this.state.data.opponent || wait;
+        let secondPlayer = this.state.data.opponent || constants.wait;
         return (
             <div className={this.gameStyle()} id={this.props.token}>
                 <div className={style.name_player}>
-                    <p className={this.stylePlayer(owner)}>{this.state.data.owner} <span className={style.cross} /></p>
-                    <p className={this.stylePlayer(opponent)}><span className={style.round} />{secondPlayer}</p>
+                    <p className={this.stylePlayer(constants.owner)}>{this.state.data.owner} <span className={style.cross} /></p>
+                    <p className={this.stylePlayer(constants.opponent)}><span className={style.round} />{secondPlayer}</p>
                 </div>
                 <div className={style.game_field}>
                     {
                         this.state.data.field.map((rows, key) => {
                             return rows.split('').map((item, key2) => {
-                                console.log(key);
                                 return <GameField item={item} key1={key} key2={key2}/>
                             })
                         })
                     }
                 </div>
+                <p className={style.timer}>{this.defineTimer()}</p>
                 <p className={style.button} onClick={this.exit}>{this.buttonExit()}</p>
             </div>
         )

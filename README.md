@@ -20,10 +20,10 @@
 Открываем файл `config/index.js`
 
 ```js
-    const config = {
-        port: 3000,
-        url: "mongodb://localhost:27017/games"
-    }
+const config = {
+    port: 3000,
+    url: "mongodb://localhost:27017/games"
+}
 ```
 Здесь мы можем поменять порт, на котором будет слушаться приложение
 и url для базы данных.

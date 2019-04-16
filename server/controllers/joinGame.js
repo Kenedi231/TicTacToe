@@ -8,10 +8,13 @@ const joinGame = async function (req, res, next) {
     let game = await gameMethods.findOne(gameToken);
     let newGame;
     if (game.opponent === "") {
+        let time = Date.now();
         newGame = await gameMethods.updateOne(gameToken, {
             opponent: userName,
             secondToken: accessToken,
-            state: constants.play
+            state: constants.play,
+            lastUpdate: time,
+            startGame: +(time)
         })
     } else {
         let viewers = game.viewers;
