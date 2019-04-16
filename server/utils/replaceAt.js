@@ -1,13 +1,9 @@
 
-async function replaceAt(str, index, at) {
-    let newStr = "";
-    for (let i = 0; i < str.length; i++) {
-        if (i !== index) {
-            newStr += str[i];
-        } else {
-            newStr += at;
-        }
-    }
+function replaceAt(str, index, at) {
+    let newStr = str;
+    let arr = newStr.split('');
+    arr[index] = at;
+    newStr = arr.join('');
     return newStr;
 }
 

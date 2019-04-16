@@ -1,15 +1,6 @@
-const horizontalCheck = require('./horizontalCheck');
-const verticalCheck = require('./verticalCheck');
+const lineCheck = require('./lineCheck');
 const crossCheck = require('./crossCheck');
-
-const done = "done";
-
-
-const x = 'x';
-const o = 'o';
-const owner = "owner";
-const opponent = "opponent";
-const draw = "draw";
+const constants = require('../constants');
 
 function returnInfo(state, result) {
     return {
@@ -20,17 +11,17 @@ function returnInfo(state, result) {
 
 async function checkField(field, game) {
     let res = true;
-    let whoH = await horizontalCheck(field);
+    let whoH = lineCheck(field);
     if (whoH === "") {
-        whoH = await verticalCheck(field);
+        whoH = lineCheck(field, true);
     }
     if (whoH === "") {
-        whoH = await crossCheck(field);
+        whoH = crossCheck(field);
     }
-    if (whoH === x ) {
-        return returnInfo(done, owner)
-    } else if (whoH === o) {
-        return returnInfo(done, opponent)
+    if (whoH === constants.x ) {
+        return returnInfo(constants.done, constants.owner)
+    } else if (whoH === constants.o) {
+        return returnInfo(constants.done, constants.opponent)
     }
     for (let i = 0; i < field.length; i++) {
         for (let j = 0; j < field[i].length; j++) {
@@ -44,7 +35,7 @@ async function checkField(field, game) {
         }
     }
     if (res) {
-        return returnInfo(done, draw)
+        return returnInfo(constants.done, constants.draw)
     }
     return returnInfo(game.state, game.gameResult)
 }

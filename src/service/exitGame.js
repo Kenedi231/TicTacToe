@@ -1,9 +1,7 @@
 import getInitPOST from './getInitPOST';
 
 function exitGame() {
-    return fetch('/games/exit', getInitPOST()).then( response => {
-        return response.json()
-    })
+    return fetch('/api/games/exit', getInitPOST()).then(response => response.json())
 }
 
 export default exitGame;

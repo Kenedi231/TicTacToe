@@ -27,7 +27,7 @@ mongoose.connect(config.url, function (err) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use('/games', gameRouter);
+app.use('/api', gameRouter);
 app.use('*', mainRouter);
 
 http.listen(config.port, function () {

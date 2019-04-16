@@ -13,11 +13,11 @@ const asyncRoute = (fn) => (req, res, next) => {
     Promise.resolve(fn(req, res, next)).catch(next);
 };
 
-router.post("/new", asyncRoute(newGame));
-router.post("/join", asyncRoute(joinGame));
-router.post("/do_step", asyncRoute(doStep));
-router.post("/exit", asyncRoute(exitGame));
-router.get("/state", asyncRoute(stateGame));
-router.get("/list", listGames);
+router.post("/games/new", asyncRoute(newGame));
+router.post("/games/join", asyncRoute(joinGame));
+router.post("/games/do_step", asyncRoute(doStep));
+router.post("/games/exit", asyncRoute(exitGame));
+router.get("/games/state", asyncRoute(stateGame));
+router.get("/games/list", listGames);
 
 module.exports = router;

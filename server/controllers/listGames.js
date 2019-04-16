@@ -1,7 +1,8 @@
-const Game = require('../models/game');
+const gameMethods = require('../utils/modelMethods');
+const constants = require('../constants');
 
 const listGames = async function (req, res, next) {
-    let gamesBD = await Game.find({'coll': "games"});
+    let gamesBD = await gameMethods.find(constants.coll);
     let games = gamesBD.map((game) => {
         const {
             gameToken,

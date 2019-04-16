@@ -1,33 +1,27 @@
-const makeToken = require('./makeToken');
-const random = require('../utils/random');
+const makeToken = require('../utils/makeToken');
 const Game = require('../models/game');
 
 const newGame = async function (req, res, next) {
     let { userName, size } = req.body;
-    let step = random(1, 2);
-    let accessToken = await makeToken(12);
-    let gameToken = await makeToken(6);
+    let accessToken = makeToken(12);
+    let gameToken = makeToken(6);
     let game;
     try {
         game = await Game.create({
-            gameToken: gameToken,
+            gameToken,
             owner: userName,
             firstToken: accessToken,
-            opponent: "",
-            secondToken: "",
             size: +size,
-            gameDuration: 0,
-            gameResult: "",
-            step: step === 1 ? "owner" : "opponent"
-        })
+        });
+        if(!game) throw {}
     } catch (e) {
-        next({ status: "error", code: 400, message: "Could not create game"})
+        next(e)
     }
     let result = {
         "status": "ok",
         "code": 0,
-        "accessToken": accessToken,
-        "gameToken": gameToken
+        accessToken,
+        gameToken
     };
 
     res.cookie("userName", userName);

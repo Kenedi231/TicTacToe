@@ -6,9 +6,7 @@ function createGame(nickname) {
         userName: nick,
         size: 3
     });
-    return fetch('/games/new', getInitPOST(body)).then( response => {
-        return response.json()
-    })
+    return fetch('/api/games/new', getInitPOST(body)).then(response => response.json())
 }
 
 export default createGame;

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const constants = require('../constants');
+
 const gameSchema = new Schema({
     gameToken: {
         type: String,
@@ -14,17 +16,20 @@ const gameSchema = new Schema({
         type: String,
     },
     secondToken: {
-        type: String
+        type: String,
+        default: ""
     },
     opponent: {
-        type: String
+        type: String,
+        default: ""
     },
     size: {
         type: Number,
         default: 3
     },
     gameDuration: {
-        type: Number
+        type: Number,
+        default: 0
     },
     gameResult: {
         type: String,
@@ -39,7 +44,8 @@ const gameSchema = new Schema({
         ]
     },
     step: {
-        type: String // Owner Opponent
+        type: String,
+        default: constants.owner // Owner Opponent
     },
     viewers: {
         type: Array,
@@ -47,11 +53,11 @@ const gameSchema = new Schema({
     },
     state: {
         type: String,
-        default: "ready" // Ready Playing Done
+        default: constants.ready // Ready Playing Done
     },
     coll: {
         type: String,
-        default: "games"
+        default: constants.coll
     }
 });
 

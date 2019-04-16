@@ -1,17 +1,18 @@
-const mark = '?';
+const constants = require('../constants');
 
-function verticalCheck(field) {
+function lineCheck(field, isVertical = false) {
     let who = "";
     for (let i = 0; i < field.length; i++) {
         let prev = "";
         for (let j = 0; j < field.length; j++) {
+            let sym = isVertical ? field[j][i] : field[i][j];
             if (prev === "") {
-                prev = field[j][i]
-            } else if (prev === field[j][i] && prev !== mark) {
-                prev = field[j][i];
+                prev = sym
+            } else if (prev === sym && prev !== constants.mark) {
+                prev = sym
             } else {
                 prev = "";
-                break;
+                break
             }
         }
         if (prev !== "") {
@@ -22,4 +23,4 @@ function verticalCheck(field) {
     return who;
 }
 
-module.exports = verticalCheck;
+module.exports = lineCheck;

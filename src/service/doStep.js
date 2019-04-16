@@ -5,9 +5,7 @@ function doStep(row, col) {
         row: row,
         col: col
     });
-    return fetch('/games/do_step', getInitPOST(body)).then( response => {
-        return response.json()
-    })
+    return fetch('/api/games/do_step', getInitPOST(body)).then(response => response.json())
 }
 
 export default doStep;

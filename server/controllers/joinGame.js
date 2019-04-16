@@ -1,30 +1,28 @@
-const makeToken = require('./makeToken');
-const Game = require('../models/game');
+const makeToken = require('../utils/makeToken');
+const gameMethods = require('../utils/modelMethods');
+const constants = require('../constants');
 
 const joinGame = async function (req, res, next) {
     let { gameToken, userName } = req.body;
     let accessToken = makeToken(12);
-    let game = await Game.findOne({ gameToken: gameToken });
+    let game = await gameMethods.findOne(gameToken);
     let newGame;
     if (game.opponent === "") {
-        newGame = await Game.updateOne({ gameToken: gameToken}, {
+        newGame = await gameMethods.updateOne(gameToken, {
             opponent: userName,
             secondToken: accessToken,
-            state: "playing"
+            state: constants.play
         })
     } else {
         let viewers = game.viewers;
         viewers.push(accessToken);
-        newGame = await Game.updateOne({ gameToken: gameToken}, {
-            viewers: viewers
-        })
+        newGame = await gameMethods.updateOne(gameToken, {viewers})
     }
     let result = {
         "status": "ok",
         code: 0,
-        "accessToken": accessToken
+        accessToken
     };
-
     res.cookie("userName", userName);
     res.cookie("accessToken", accessToken);
     res.cookie("gameToken", gameToken);

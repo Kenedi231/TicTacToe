@@ -48,7 +48,7 @@ class Game extends Component {
                 data: {}
             });
         }).catch(err => {
-            console.log(err);
+            alert(err);
         })
     };
 
@@ -79,7 +79,8 @@ class Game extends Component {
     };
 
     buttonExit = () => {
-        let condition = this.state.data.opponent === "" || this.state.data.winner !== "" || this.state.data.youViewer;
+        const { data: { opponent, winner, youViewer } } = this.state;
+        let condition = opponent === "" || winner !== "" || youViewer;
         if (condition) {
             return back
         } else {
@@ -99,7 +100,14 @@ class Game extends Component {
                     <p className={this.stylePlayer(opponent)}><span className={style.round} />{secondPlayer}</p>
                 </div>
                 <div className={style.game_field}>
-                    <GameField field={this.state.data.field} />
+                    {
+                        this.state.data.field.map((rows, key) => {
+                            return rows.split('').map((item, key2) => {
+                                console.log(key);
+                                return <GameField item={item} key1={key} key2={key2}/>
+                            })
+                        })
+                    }
                 </div>
                 <p className={style.button} onClick={this.exit}>{this.buttonExit()}</p>
             </div>

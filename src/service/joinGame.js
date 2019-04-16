@@ -5,9 +5,7 @@ function joinGame(nick, token) {
         gameToken: token,
         userName: nick
     });
-    return fetch('/games/join', getInitPOST(body)).then( response => {
-        return response.json()
-    })
+    return fetch('/api/games/join', getInitPOST(body)).then(response => response.json())
 }
 
 export default joinGame;
